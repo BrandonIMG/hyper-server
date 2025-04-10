@@ -433,6 +433,43 @@ export interface ApiLegalLegal extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMainSliderMainSlider extends Struct.CollectionTypeSchema {
+  collectionName: 'main_sliders';
+  info: {
+    displayName: 'Main Slider';
+    pluralName: 'main-sliders';
+    singularName: 'main-slider';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::main-slider.main-slider'
+    > &
+      Schema.Attribute.Private;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
+    publishedAt: Schema.Attribute.DateTime;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Struct.CollectionTypeSchema {
   collectionName: 'pages';
   info: {
@@ -458,6 +495,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.String;
     title: Schema.Attribute.String;
@@ -1042,6 +1080,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::event.event': ApiEventEvent;
       'api::legal.legal': ApiLegalLegal;
+      'api::main-slider.main-slider': ApiMainSliderMainSlider;
       'api::page.page': ApiPagePage;
       'api::post.post': ApiPostPost;
       'api::social.social': ApiSocialSocial;

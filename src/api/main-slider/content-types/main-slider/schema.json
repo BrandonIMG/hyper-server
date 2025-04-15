@@ -4,24 +4,29 @@
   "info": {
     "singularName": "main-slider",
     "pluralName": "main-sliders",
-    "displayName": "Main Slider"
+    "displayName": "Main Slider",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
     "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "order": {
       "type": "integer",
       "default": 1,
       "required": true,
       "min": 1
+    },
+    "url": {
+      "type": "string"
     }
   }
 }
